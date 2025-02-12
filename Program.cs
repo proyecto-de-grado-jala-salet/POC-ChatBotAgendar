@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Model;
 using Services;
+using Services.Handler;
 using Services.Interfaces;
 
 
@@ -12,6 +13,10 @@ builder.Services.AddHttpClient();
 
 // Registro de servicios personalizados
 builder.Services.AddSingleton<IConversationManager, ConversationManager>();
+builder.Services.AddSingleton<IAppointmentSlotManager, AppointmentSlotManager>();
+builder.Services.AddScoped<IConversationStateHandler, ConfirmationStateHandler>();
+builder.Services.AddScoped<IConversationStateHandler, SpecialtyStateHandler>();
+builder.Services.AddScoped<IConversationStateHandler, ScheduleStateHandler>();
 builder.Services.AddScoped<IWhatsAppService, WhatsAppService>();
 builder.Services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
 builder.Services.AddScoped<IChatBotService, ChatBotService>();
