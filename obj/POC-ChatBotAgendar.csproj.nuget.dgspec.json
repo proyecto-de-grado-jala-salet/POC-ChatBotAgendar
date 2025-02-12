@@ -45,9 +45,17 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
+            "Google.Apis.Auth": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[1.69.0, )"
+            },
+            "Google.Apis.Calendar.v3": {
+              "target": "Package",
+              "version": "[1.69.0.3667, )"
+            },
+            "Rivescript.CSharp": {
+              "target": "Package",
+              "version": "[0.1.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
