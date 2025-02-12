@@ -2,12 +2,13 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
+using Services.Interfaces;
 
-namespace POC_ChatBotAgendar.Services;
+namespace Services;
 
-public static class GoogleCalendarService
+public class GoogleCalendarService : IGoogleCalendarService
 {
-    public static bool CreateEvent(DateTime startTime, string specialty)
+    public async Task<bool> CreateEventAsync(DateTime startTime, string specialty)
     {
         try
         {

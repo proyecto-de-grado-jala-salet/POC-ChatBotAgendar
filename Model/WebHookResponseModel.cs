@@ -4,5 +4,5 @@ namespace Model;
 
 public class WebHookResponseModel
 {
-    public required Entry[] entry { get; set; }
+    public Entry[] Entry { get; set; } = Array.Empty<Entry>();
 }

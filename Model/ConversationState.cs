@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Concurrent;
-
-namespace POC_ChatBotAgendar.Model;
+namespace Model;
 
 public class ConversationState
 {
-    public string State { get; set; } = "";
-    public string Specialty { get; set; } = "";
+    public string State { get; set; }  = string.Empty;
+    public string Specialty { get; set; }  = string.Empty;
 }

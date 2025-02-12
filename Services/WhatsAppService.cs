@@ -1,33 +1,42 @@
 using System.Text;
 using System.Text.Json;
+using System.Net.Http.Headers;
+using Services.Interfaces;
 
-namespace POC_ChatBotAgendar.Services;
+namespace Services;
 
-public static class WhatsAppService
-{
-    // Reemplaza estos valores con tus datos
-    private static readonly string Token = "EAANdb8fxt1QBO8C9qahRoYXZCBNnZAugzarmqE1aQywKaCet9isPuZAubTRt551Qu3hO0aV5vOnMuh4EV4cJDjHNwE4ZCSZAfgDmrQrnNTa7jJ68VySvkvcADA5H7tnyl8rq6Aguar5RHBv0ceDZAVGfvOB59YQPNZCcb1sW9vXZAZBeJ6ZAhZCca9DRRFGgpZADNxyAZAwZDZD";
-    private static readonly string IdCelphone = "511685075369811";
-    private static readonly HttpClient _client = new HttpClient();
-
-    public static async Task SendTextMessage(string celphone, string text)
+public class WhatsAppService : IWhatsAppService
     {
-        var payload = new
+        private readonly HttpClient _httpClient;
+        private readonly string _token;
+        private readonly string _idCelphone;
+
+        public WhatsAppService(HttpClient httpClient, IConfiguration configuration)
         {
-            messaging_product = "whatsapp",
-            recipient_type = "individual",
-            to = celphone,
-            type = "text",
-            text = new { body = text }
-        };
+            _httpClient = httpClient;
+            _token = configuration["WhatsApp:Token"];
+            _idCelphone = configuration["WhatsApp:IdCelphone"];
+        }
 
-        Console.WriteLine(celphone);
+        public async Task SendTextMessageAsync(string phone, string message)
+        {
+            var url = $"https://graph.facebook.com/v21.0/{_idCelphone}/messages";
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
-        string json = JsonSerializer.Serialize(payload);
-        var request = new HttpRequestMessage(HttpMethod.Post, $"https://graph.facebook.com/v21.0/{IdCelphone}/messages");
-        request.Headers.Add("Authorization", "Bearer " + Token);
-        request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            var payload = new
+            {
+                messaging_product = "whatsapp",
+                recipient_type = "individual",
+                to = phone,
+                type = "text",
+                text = new { body = message }
+            };
 
-        await _client.SendAsync(request);
-    }
+            request.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+        }
+    
 }

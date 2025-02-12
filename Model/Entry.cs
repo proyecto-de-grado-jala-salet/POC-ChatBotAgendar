@@ -4,5 +4,5 @@ namespace Model;
 
 public class Entry
 {
-    public Change[] changes { get; set; }
-}
+        public Change[] Changes { get; set; } = Array.Empty<Change>();
+    }

@@ -1,8 +1,6 @@
-using System;
-
 namespace Model;
 
 public class Value
 {
-    public Messages[] messages { get; set; }
+    public Message[] Messages { get; set; } = Array.Empty<Message>();
 }
