@@ -2,6 +2,13 @@ using System;
 using Services.Interfaces;
 using System.Globalization;
 
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using Model;
+using Repositories;
+using Services.Interfaces;
+
 namespace Services.Handler;
 
 public class ScheduleStateHandler : IConversationStateHandler
@@ -11,16 +18,20 @@ public class ScheduleStateHandler : IConversationStateHandler
     private readonly IGoogleCalendarService _googleCalendarService;
     private readonly IConversationManager _conversationManager;
     private readonly IAppointmentSlotManager _appointmentSlotManager;
+    private readonly InMemoryAppointmentRepository _inMemoryAppointmentRepository;
 
-    public ScheduleStateHandler(IWhatsAppService whatsAppService,
-                                IGoogleCalendarService googleCalendarService,
-                                IConversationManager conversationManager,
-                                IAppointmentSlotManager appointmentSlotManager)
+    public ScheduleStateHandler(
+        IWhatsAppService whatsAppService,
+        IGoogleCalendarService googleCalendarService,
+        IConversationManager conversationManager,
+        IAppointmentSlotManager appointmentSlotManager,
+        InMemoryAppointmentRepository inMemoryAppointmentRepository)
     {
         _whatsAppService = whatsAppService;
         _googleCalendarService = googleCalendarService;
         _conversationManager = conversationManager;
         _appointmentSlotManager = appointmentSlotManager;
+        _inMemoryAppointmentRepository = inMemoryAppointmentRepository;
     }
 
     public async Task HandleMessageAsync(string phone, string message)
@@ -51,20 +62,28 @@ public class ScheduleStateHandler : IConversationStateHandler
             await _whatsAppService.SendTextMessageAsync(phone,
                 $"Ha seleccionado el horario: {selectedTimeStr}. Su cita está siendo agendada.");
 
+            // Crear la cita y guardarla en el repositorio in-memory
+            var appointment = new Appointment
+            {
+                Phone = phone,
+                FechaHora = selectedSlot.StartTime,
+                Especialidad = specialty
+            };
+
+            _inMemoryAppointmentRepository.SaveAppointment(appointment);
+            Console.WriteLine("Appointment: "+ appointment.Especialidad);
+
+            // Intentar crear el evento en Google Calendar
             try
             {
-                DateTime startTime = selectedSlot.StartTime;
-                bool eventCreated = await _googleCalendarService.CreateEventAsync(startTime, specialty);
-
+                bool eventCreated = await _googleCalendarService.CreateEventAsync(selectedSlot.StartTime, specialty);
                 if (eventCreated)
                 {
-                    await _whatsAppService.SendTextMessageAsync(phone,
-                        "La cita se agendó correctamente en Google Calendar.");
+                    await _whatsAppService.SendTextMessageAsync(phone, "La cita se agendó correctamente en Google Calendar.");
                 }
                 else
                 {
-                    await _whatsAppService.SendTextMessageAsync(phone,
-                        "Ocurrió un error al agendar la cita en Google Calendar.");
+                    await _whatsAppService.SendTextMessageAsync(phone, "Ocurrió un error al agendar la cita en Google Calendar.");
                 }
             }
             catch (Exception)
@@ -72,6 +91,8 @@ public class ScheduleStateHandler : IConversationStateHandler
                 await _whatsAppService.SendTextMessageAsync(phone,
                     "Ocurrió un error al procesar la fecha y hora seleccionada.");
             }
+
+            // Se limpia el estado de la conversación
             _conversationManager.ClearState(phone);
         }
         else

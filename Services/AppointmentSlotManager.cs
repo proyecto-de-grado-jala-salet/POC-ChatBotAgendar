@@ -14,22 +14,13 @@ public class AppointmentSlotManager : IAppointmentSlotManager
             new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 22, 0, 0), Specialty = "Psicóloga", Booked = false },
             new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 23, 0, 0), Specialty = "Psicóloga", Booked = false },
             new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 1, 0, 0), Specialty = "Psicóloga", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 2, 0, 0), Specialty = "Psicóloga", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 3, 0, 0), Specialty = "Psicóloga", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 4, 0, 0), Specialty = "Psicóloga", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 5, 0, 0), Specialty = "Psicóloga", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 6, 0, 0), Specialty = "Psicóloga", Booked = false },
+            new AppointmentSlot { StartTime = new DateTime(2025, 2, 13, 17, 12, 0), Specialty = "Psicóloga", Booked = false },
 
             // Horarios para Fisioterapia (pueden ser iguales o diferentes; son independientes)
             new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 21, 0, 0), Specialty = "Fisioterapia", Booked = false },
             new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 22, 0, 0), Specialty = "Fisioterapia", Booked = false },
             new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 23, 0, 0), Specialty = "Fisioterapia", Booked = false },
             new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 1, 0, 0), Specialty = "Fisioterapia", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 2, 0, 0), Specialty = "Fisioterapia", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 3, 0, 0), Specialty = "Fisioterapia", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 4, 0, 0), Specialty = "Fisioterapia", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 5, 0, 0), Specialty = "Fisioterapia", Booked = false },
-            new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 6, 0, 0), Specialty = "Fisioterapia", Booked = false },
         };
 
     public List<AppointmentSlot> GetAvailableSlots(string specialty)
