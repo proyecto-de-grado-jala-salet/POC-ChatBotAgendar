@@ -1,8 +1,9 @@
-using System;
-
 namespace Model;
 
+/// <summary> 
+/// This class holds a change that contains a value.
+/// </summary>
 public class Change
 {
-    public Value value { get; set; }
+    public required Value value { get; set; }
 }

@@ -6,8 +6,17 @@ using Services.Interfaces;
 
 namespace Services;
 
+/// <summary>
+/// This class creates events in Google Calendar.
+/// </summary>
 public class GoogleCalendarService : IGoogleCalendarService
 {
+    /// <summary>
+    /// Creates a new event in Google Calendar.
+    /// </summary>
+    /// <param name="startTime">The start time of the event.</param>
+    /// <param name="specialty">The specialty of the appointment.</param>
+    /// <returns>True if the event was created; false otherwise.</returns>
     public async Task<bool> CreateEventAsync(DateTime startTime, string specialty)
     {
         try

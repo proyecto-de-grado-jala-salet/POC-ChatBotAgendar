@@ -1,8 +1,10 @@
-using System;
 using Model;
 
 namespace Services.Interfaces;
 
+/// <summary>
+/// This interface manages the conversation state of users.
+/// </summary>
 public interface IConversationManager
 {
     ConversationState GetState(string phone);

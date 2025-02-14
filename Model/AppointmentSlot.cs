@@ -1,10 +1,11 @@
-using System;
-
 namespace Model;
 
+/// <summary> 
+/// This class represents a time slot for an appointment.
+/// </summary>
 public class AppointmentSlot
 {
     public DateTime StartTime { get; set; }
-    public string Specialty { get; set; } // Por ejemplo: "Psicóloga" o "Fisioterapia"
+    public required string Specialty { get; set; }
     public bool Booked { get; set; }
 }

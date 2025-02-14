@@ -1,17 +1,27 @@
-using System;
 using Services.Interfaces;
 using System.Globalization;
-using System.Threading.Tasks;
 
 namespace Services.Handler;
 
+/// <summary>
+/// This handler manages the state where the system waits for the user to choose a specialty.
+/// </summary>
 public class SpecialtyStateHandler : IConversationStateHandler
 {
+    /// <summary>
+    /// The state name that this handler processes.
+    /// </summary>
     public string State => "esperando_especialidad";
     private readonly IWhatsAppService _whatsAppService;
     private readonly IConversationManager _conversationManager;
     private readonly IAppointmentSlotManager _appointmentSlotManager;
 
+    /// <summary>
+    /// This constructor sets up the handler.
+    /// </summary>
+    /// <param name="whatsAppService">Service to send WhatsApp messages.</param>
+    /// <param name="conversationManager">Manager for conversation state.</param>
+    /// <param name="appointmentSlotManager">Manager for appointment slots.</param>
     public SpecialtyStateHandler(IWhatsAppService whatsAppService,
                                  IConversationManager conversationManager,
                                  IAppointmentSlotManager appointmentSlotManager)
@@ -21,6 +31,12 @@ public class SpecialtyStateHandler : IConversationStateHandler
         _appointmentSlotManager = appointmentSlotManager;
     }
 
+    /// <summary>
+    /// This method handles a message when waiting for the user to choose a specialty.
+    /// It sets the specialty and then shows available time slots.
+    /// </summary>
+    /// <param name="phone">The sender's phone number.</param>
+    /// <param name="message">The message with the chosen option.</param>
     public async Task HandleMessageAsync(string phone, string message)
     {
         if (message == "1" || message == "2")
@@ -29,7 +45,6 @@ public class SpecialtyStateHandler : IConversationStateHandler
             _conversationManager.SetSpecialty(phone, specialty);
             _conversationManager.SetState(phone, "esperando_horario");
 
-            // Obtiene los horarios disponibles para la especialidad seleccionada.
             var availableSlots = _appointmentSlotManager.GetAvailableSlots(specialty);
             if (availableSlots.Count == 0)
             {
@@ -40,7 +55,7 @@ public class SpecialtyStateHandler : IConversationStateHandler
             }
 
             string horariosDisponibles = "Estos son los horarios disponibles:\n";
-            // Se muestran numerados desde 1 hasta el total de disponibles.
+            
             for (int i = 0; i < availableSlots.Count; i++)
             {
                 string timeStr = availableSlots[i].StartTime.ToString("H:mm, dd MMM yyyy", new CultureInfo("es-ES"));

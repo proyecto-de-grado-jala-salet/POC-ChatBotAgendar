@@ -1,5 +1,4 @@
 using Microsoft.OpenApi.Models;
-using Model;
 using Services;
 using Services.Handler;
 using Services.Interfaces;
@@ -8,29 +7,30 @@ using Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Agregar servicios a la inyección de dependencias
+// Add services to dependency injection
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 
-// Registro de servicios personalizados
+// Custom Service Registration
 builder.Services.AddSingleton<IConversationManager, ConversationManager>();
 builder.Services.AddSingleton<IAppointmentSlotManager, AppointmentSlotManager>();
 
-// Registrar el repositorio in-memory
+// Register the in-memory repository
 builder.Services.AddSingleton<InMemoryAppointmentRepository>();
 
-// Registro de handlers y servicios
+// Registering handlers and services
 builder.Services.AddScoped<IConversationStateHandler, ConfirmationStateHandler>();
-builder.Services.AddScoped<IConversationStateHandler, SpecialtyStateHandler>(); // Handler para "esperando_especialidad"
+// Handler for "esperando_especialidad"
+builder.Services.AddScoped<IConversationStateHandler, SpecialtyStateHandler>();
 builder.Services.AddScoped<IConversationStateHandler, ScheduleStateHandler>();
 builder.Services.AddScoped<IWhatsAppService, WhatsAppService>();
 builder.Services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
 builder.Services.AddScoped<IChatBotService, ChatBotService>();
 
-// Registrar el servicio en segundo plano para notificaciones
+// Register background service for notifications
 builder.Services.AddHostedService<AppointmentReminderService>();
 
-// Configuración de Swagger/OpenAPI
+// Swagger/OpenAPI Configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {

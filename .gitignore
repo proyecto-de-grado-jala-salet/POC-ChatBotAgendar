@@ -1,6 +1,6 @@
 credentials.json
 
-# Archivos de configuración de usuario
+# User configuration files
 .vscode/
 .idea/
 *.suo
@@ -8,7 +8,7 @@ credentials.json
 *.userosscache
 *.sln.docstates
 
-# Archivos de compilación
+# Build files
 bin/
 obj/
 *.dll
@@ -19,7 +19,7 @@ obj/
 *.csproj.user
 *.csproj.DotSettings
 
-# Dependencias y paquetes
+# Dependencies and packages
 packages/
 node_modules/
 *.nupkg
@@ -27,16 +27,8 @@ node_modules/
 .project.lock.json
 project.lock.json
 
-# Archivos de salida de publicaciones
-publish/
-wwwroot/
-
-# Archivos de configuración de entorno
+# Environment configuration files
 .env
 .env.local
 appsettings.json
 appsettings.*.json
-
-# Archivos de Docker y contenedores
-docker-compose.override.yml
-logs/

@@ -5,12 +5,20 @@ using Services.Interfaces;
 
 namespace Services;
 
+/// <summary>
+/// This class sends text messages using WhatsApp.
+/// </summary>
 public class WhatsAppService : IWhatsAppService
 {
     private readonly HttpClient _httpClient;
     private readonly string _token;
     private readonly string _idCelphone;
 
+    /// <summary>
+    /// This constructor sets up the WhatsApp service with an HTTP client and configuration.
+    /// </summary>
+    /// <param name="httpClient">The HTTP client to send requests.</param>
+    /// <param name="configuration">The configuration that holds WhatsApp credentials.</param>
     public WhatsAppService(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
@@ -18,6 +26,11 @@ public class WhatsAppService : IWhatsAppService
         _idCelphone = configuration["WhatsApp:IdCelphone"];
     }
 
+    /// <summary>
+    /// Sends a text message to a given phone number via WhatsApp.
+    /// </summary>
+    /// <param name="phone">The recipient's phone number.</param>
+    /// <param name="message">The text message to send.</param>
     public async Task SendTextMessageAsync(string phone, string message)
     {
         var url = $"https://graph.facebook.com/v21.0/{_idCelphone}/messages";
