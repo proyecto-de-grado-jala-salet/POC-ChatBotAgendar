@@ -1,0 +1,34 @@
+credentials.json
+
+# User configuration files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build files
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.log
+*.cache
+*.csproj.user
+*.csproj.DotSettings
+
+# Dependencies and packages
+packages/
+node_modules/
+*.nupkg
+*.snupkg
+.project.lock.json
+project.lock.json
+
+# Environment configuration files
+.env
+.env.local
+appsettings.json
+appsettings.*.json
