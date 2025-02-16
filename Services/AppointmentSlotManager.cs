@@ -15,17 +15,17 @@ public class AppointmentSlotManager : IAppointmentSlotManager
     private readonly List<AppointmentSlot> _slots = new List<AppointmentSlot>
     {
         // Horarios para Psicóloga
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 21, 0, 0, DateTimeKind.Utc), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 22, 0, 0, DateTimeKind.Utc), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 23, 0, 0, DateTimeKind.Utc), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 1, 0, 0, DateTimeKind.Utc), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 13, 19, 10, 0, DateTimeKind.Utc), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 21, 0, 0, DateTimeKind.Local), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 22, 0, 0, DateTimeKind.Local), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 23, 0, 0, DateTimeKind.Local), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 1, 0, 0, DateTimeKind.Local), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 15, 21, 58, 0, DateTimeKind.Local), Specialty = PSYCHOLOGY_SPECIALTY, Booked = false },
 
         // Horarios para Fisioterapia (pueden ser iguales o diferentes; son independientes)
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 21, 0, 0, DateTimeKind.Utc), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 22, 0, 0, DateTimeKind.Utc), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 23, 0, 0, DateTimeKind.Utc), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
-        new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 1, 0, 0, DateTimeKind.Utc), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 21, 0, 0, DateTimeKind.Local), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 22, 0, 0, DateTimeKind.Local), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 10, 23, 0, 0, DateTimeKind.Local), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
+        new AppointmentSlot { StartTime = new DateTime(2025, 2, 11, 1, 0, 0, DateTimeKind.Local), Specialty = PHYSIOTHERAPY_SPECIALTY, Booked = false },
     };
 
     /// <summary>

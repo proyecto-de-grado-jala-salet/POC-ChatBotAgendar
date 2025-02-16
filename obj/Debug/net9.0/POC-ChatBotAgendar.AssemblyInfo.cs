@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POC-ChatBotAgendar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c2fc89cd477181573b1f16b080c1ea0fd5532c5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+926c2a3d1a4ad5105fa8e7c30af8d1d8f4ef727b")]
 [assembly: System.Reflection.AssemblyProductAttribute("POC-ChatBotAgendar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POC-ChatBotAgendar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
